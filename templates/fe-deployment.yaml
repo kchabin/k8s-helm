@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ppap-fe
+  labels:
+    app: ppap-fe
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: ppap-fe
+  template:
+    metadata:
+      labels:
+        app: ppap-fe
+    spec:
+      containers:
+        - name: fe
+          image: "{{ .Values.image.fe.repository }}:{{ .Values.image.fe.tag }}"
+          ports:
+            - containerPort: 80

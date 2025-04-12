@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ppap-llm
+  labels:
+    app: ppap-llm
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: ppap-llm
+  template:
+    metadata:
+      labels:
+        app: ppap-llm
+    spec:
+      containers:
+        - name: llm
+          image: "{{ .Values.image.llm.repository }}:{{ .Values.image.llm.tag }}"
+          ports:
+            - containerPort: 8000

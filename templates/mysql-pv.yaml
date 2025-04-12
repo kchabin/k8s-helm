@@ -1,0 +1,13 @@
+{{- if .Values.mysql.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.mysql.persistence.volumeName }}
+spec:
+  capacity:
+    storage: {{ .Values.mysql.persistence.size }}
+  accessModes:
+    - {{ .Values.mysql.persistence.accessMode }}
+  hostPath:
+    path: {{ .Values.mysql.persistence.hostPath }}
+{{- end }}
